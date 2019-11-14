@@ -1,6 +1,27 @@
+# Springfox
+
 Forked from release 2.9.2 and updated to spring-boot 2.2.0 and Swagger UI 3.24.0
 
-# Springfox
+```xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+
+<dependency>
+  <groupId>com.github.catnipdotch.springfox</groupId>
+  <artifactId>springfox-swagger2</artifactId>
+  <version>2.9.3</version>
+</dependency>
+
+ <dependency>
+  <groupId>com.github.catnipdotch.springfox</groupId>
+  <artifactId>springfox-swagger-ui</artifactId>
+  <version>2.9.3</version>
+</dependency>
+```
 
 ### About
 For more information on this project visit the [Springfox Website](http://springfox.io) or
