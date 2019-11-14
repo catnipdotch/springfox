@@ -4,61 +4,27 @@ allprojects {
     }
 
     apply plugin: 'java'
+    apply plugin: 'maven'
     apply from: "$rootDir/gradle/dependencies.gradle"
 
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 }
 
 subprojects {
-    version = '1.0'
+    version = '2.9.3'
+    group = 'io.springfox'
 
+    configurations {
+        provided
+        compile.extendsFrom provided
+    }
 
-}
-
-/*
-buildscript {
-  repositories {
-    jcenter()
-  }
-
-    plugins {
-        // Apply the java-library plugin to add support for Java Library
-        id 'java-library'
+    java {
+        withSourcesJar()
+        withJavadocJar()
     }
 }
 
 
-
-ext {
-  jdkVersion = 1.8
-}
-
-subprojects {
-
-    plugins {
-        id 'java'
-    }
-
-  repositories {
-    jcenter()
-  }
-
-  configurations {
-    provided
-    compile.extendsFrom provided
-  }
-
-  compileJava.options.encoding = 'UTF-8'
-
-  sourceCompatibility = jdkVersion
-  targetCompatibility = jdkVersion
-  group = 'io.springfox'
-  version = project.rootProject.version
-
-}
-
-task wrapper(type: Wrapper) {
-  gradleVersion = '6.0'
-}
-
- */
 
