@@ -76,7 +76,9 @@ public abstract class ServiceModelToSwagger2Mapper {
       @Mapping(target = "parameters", ignore = true),
       @Mapping(target = "responses", ignore = true),
       @Mapping(target = "externalDocs", ignore = true),
-      @Mapping(target = "vendorExtensions", source = "vendorExtensions")
+      @Mapping(target = "vendorExtensions", source = "vendorExtensions"),
+          @Mapping(target = "scheme", ignore = true),
+          @Mapping(target = "tag", ignore = true)
   })
   public abstract Swagger mapDocumentation(Documentation from);
 
@@ -85,10 +87,14 @@ public abstract class ServiceModelToSwagger2Mapper {
           qualifiedBy = { LicenseMapper.LicenseTranslator.class, LicenseMapper.License.class }),
       @Mapping(target = "contact", source = "from.contact"),
       @Mapping(target = "termsOfService", source = "termsOfServiceUrl"),
-      @Mapping(target = "vendorExtensions", source = "vendorExtensions")
+      @Mapping(target = "vendorExtensions", source = "vendorExtensions"),
+          @Mapping(target = "mergeWith", ignore = true)
   })
   protected abstract Info mapApiInfo(ApiInfo from);
 
+  @Mappings({
+          @Mapping(target = "vendorExtensions", ignore = true)
+  })
   protected abstract Contact map(springfox.documentation.service.Contact from);
 
   @Mappings({
@@ -98,7 +104,11 @@ public abstract class ServiceModelToSwagger2Mapper {
       @Mapping(target = "security", source = "securityReferences"),
       @Mapping(target = "responses", source = "responseMessages"),
       @Mapping(target = "vendorExtensions", source = "vendorExtensions"),
-      @Mapping(target = "externalDocs", ignore = true)
+      @Mapping(target = "externalDocs", ignore = true),
+          @Mapping(target = "scheme", ignore = true),
+          @Mapping(target = "parameter", ignore = true),
+          @Mapping(target = "defaultResponse", ignore = true),
+          @Mapping(target = "tag", ignore = true)
   })
   protected abstract Operation mapOperation(springfox.documentation.service.Operation from);
 

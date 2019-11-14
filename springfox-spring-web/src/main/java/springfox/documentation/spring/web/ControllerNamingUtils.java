@@ -25,8 +25,6 @@ import org.springframework.util.Assert;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.util.UriUtils;
 
-import java.io.UnsupportedEncodingException;
-
 import static springfox.documentation.spring.web.paths.Paths.splitCamelCase;
 
 public class ControllerNamingUtils {
@@ -52,7 +50,7 @@ public class ControllerNamingUtils {
   public static String encode(String path) {
     try {
       return UriUtils.encodePath(path, ISO_8859_1);
-    } catch (UnsupportedEncodingException e) {
+    } catch (Exception e) {
       log.error("Could not encode:" + path, e);
     }
     return path;

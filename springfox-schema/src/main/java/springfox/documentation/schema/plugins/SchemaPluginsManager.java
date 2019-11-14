@@ -74,21 +74,21 @@ public class SchemaPluginsManager {
 
   public Optional<Model> syntheticModel(ModelContext context) {
     if (syntheticModelProviders.hasPluginFor(context)) {
-      return Optional.of(syntheticModelProviders.getPluginFor(context).create(context));
+      return Optional.of(syntheticModelProviders.getPluginFor(context).get().create(context));
     }
     return Optional.absent();
   }
 
   public List<ModelProperty> syntheticProperties(ModelContext context) {
     if (syntheticModelProviders.hasPluginFor(context)) {
-      return syntheticModelProviders.getPluginFor(context).properties(context);
+      return syntheticModelProviders.getPluginFor(context).get().properties(context);
     }
     return new ArrayList<ModelProperty>();
   }
 
   public Set<ResolvedType> dependencies(ModelContext context) {
     if (syntheticModelProviders.hasPluginFor(context)) {
-      return syntheticModelProviders.getPluginFor(context).dependencies(context);
+      return syntheticModelProviders.getPluginFor(context).get().dependencies(context);
     }
     return new HashSet<ResolvedType>();
   }

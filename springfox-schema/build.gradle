@@ -1,4 +1,6 @@
 dependencies {
-  compile project(':springfox-core')
-  compile project(':springfox-spi')
+    compile project(':springfox-core')
+    compile project(':springfox-spi')
+    compileOnly libs.clientProvided
+    compileOnly libs.springProvided
 }

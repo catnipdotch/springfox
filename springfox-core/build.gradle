@@ -1,7 +1,7 @@
 dependencies {
-  compile "net.bytebuddy:byte-buddy:${byteBuddyVersion}"
-  compile libs.core
-  compile libs.spring
+    compile "net.bytebuddy:byte-buddy:${byteBuddyVersion}"
+    compile libs.core
+    compile libs.spring
 
     compileOnly libs.springProvided
     compileOnly libs.clientProvided

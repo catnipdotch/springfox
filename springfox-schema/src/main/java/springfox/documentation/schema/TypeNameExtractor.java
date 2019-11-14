@@ -119,7 +119,7 @@ public class TypeNameExtractor {
 
   private String typeName(ModelNameContext context) {
     TypeNameProviderPlugin selected =
-        typeNameProviders.getPluginFor(context.getDocumentationType(), new DefaultTypeNameProvider());
+        typeNameProviders.getPluginOrDefaultFor(context.getDocumentationType(), new DefaultTypeNameProvider());
     return selected.nameFor(context.getType());
   }
 }

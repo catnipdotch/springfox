@@ -3,6 +3,6 @@ dependencies {
     compile libs.spring
     compile project(':springfox-spi')
 
-    compileOnly libs.springProvided
+    compileOnly libs.clientProvided
     compileOnly "javax.validation:validation-api:$validationApiVersion"
 }

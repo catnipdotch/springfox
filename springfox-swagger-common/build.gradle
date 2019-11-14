@@ -1,10 +1,10 @@
 dependencies {
-  compile libs.swagger2Core
-  compile project(':springfox-spi')
-  compile project(':springfox-schema')
-  compile project(':springfox-spring-web')
-  compile libs.core
-  compile libs.spring
+    compile libs.swagger2Core
+    compile project(':springfox-spi')
+    compile project(':springfox-schema')
+    compile project(':springfox-spring-web')
+    compile libs.core
+    compile libs.spring
 
     compileOnly libs.springProvided
     compileOnly libs.clientProvided
