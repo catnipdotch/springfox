@@ -1,3 +1,4 @@
+Forked from release 2.9.2 and updated to spring-boot 2.2.0 and Swagger UI 3.24.0
 
 # Springfox
 
