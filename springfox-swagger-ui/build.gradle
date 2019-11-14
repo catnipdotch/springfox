@@ -40,7 +40,6 @@ ext {
 
 dependencies {
   compile project(':springfox-spring-web')
-  testCompile libs.test
 }
 
 node {

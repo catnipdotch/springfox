@@ -1,76 +1,50 @@
-buildscript {
-  repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
-    jcenter()
-  }
-
-  dependencies {
-    classpath "com.github.adrianbk:gradle-jvmsrc-plugin:0.6.1"
-    classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2"
-    classpath "com.github.adrianbk:gradle-travisci-trigger-plugin:1.0.0"
-    classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.2'
-    classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
-    classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.2"
-    classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.4"
-    classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.3"
-    classpath "org.ajoberstar:gradle-git:1.7.2"
-  }
-}
-
-apply from: "$rootDir/gradle/dependencies.gradle"
-apply from: "$rootDir/gradle/ide.gradle"
-apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'build-dashboard'
-apply plugin: 'project-report'
-apply plugin: 'springfox-multi-release'
-
-ext {
-  apiKey = System.getenv('GIT_HUB_API_KEY')
-  jdkVersion = 1.6
-}
-
 allprojects {
-  apply plugin: 'jacoco'
+    repositories {
+        jcenter()
+    }
+
+    apply plugin: 'java'
+    apply from: "$rootDir/gradle/dependencies.gradle"
+
 }
 
 subprojects {
-  //Not strictly groovy projects but useful for the IDE to recognise groovy test sources
-  apply plugin: 'groovy' //gradle groovy plugin extends the java plugin
-  apply plugin: 'com.github.adrianbk.jvmsrc'
-  apply plugin: 'checkstyle'
+    version = '1.0'
 
-  javadoc {
-    options.encoding = 'UTF-8'
-  }
-  //Commented PMD and Findbugs as its taking too much time for very little value
-  //Perhaps run every 20 CI builds (mod of ci build number)
-//  apply from: "$rootDir/gradle/code-quality.gradle"
-  if (springfox.gradlebuild.utils.ProjectDefinitions.publishable(it)) {
-    apply from: "$rootDir/gradle/publishing.gradle"
-  }
+
+}
+
+/*
+buildscript {
   repositories {
     jcenter()
   }
 
-  checkstyle {
-    configFile = file("$rootDir/config/checkstyle.xml")
-  }
+    plugins {
+        // Apply the java-library plugin to add support for Java Library
+        id 'java-library'
+    }
+}
 
-  checkstyleMain.source = "src/main/java"
 
-  test {
-    maxParallelForks = 2
+
+ext {
+  jdkVersion = 1.8
+}
+
+subprojects {
+
+    plugins {
+        id 'java'
+    }
+
+  repositories {
+    jcenter()
   }
 
   configurations {
     provided
     compile.extendsFrom provided
-  }
-
-  jvmsrc {
-    packageName "springfox"
   }
 
   compileJava.options.encoding = 'UTF-8'
@@ -80,48 +54,11 @@ subprojects {
   group = 'io.springfox'
   version = project.rootProject.version
 
-  task allDeps(type: DependencyReportTask) {}
-
-  jacoco {
-    toolVersion = "$jacocoVersion"
-  }
-  
-  jacocoTestReport {
-    reports {
-      xml.enabled true
-      html.enabled true
-    }
-  }
-
-  test {
-    jvmArgs "-Dorg.spockframework.mock.ignoreByteBuddy=true"
-  }
 }
-
-apply from: "$rootDir/gradle/documentation.gradle"
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '4.4.1'
+  gradleVersion = '6.0'
 }
 
-task codeCoverageReport(type: JacocoReport) {
+ */
 
-  // Gather execution data from all subprojects
-  // (change this if you e.g. want to calculate unit test/integration test coverage separately)
-  executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
-  // Add all relevant sourcesets from the subprojects
-  subprojects.each { sourceSets it.sourceSets.main }
-
-  reports {
-    xml.enabled true
-    xml.destination "${buildDir}/reports/jacoco/report.xml"
-    html.enabled false
-    csv.enabled false
-  }
-}
-
-// always run the tests before generating the report
-codeCoverageReport.dependsOn {
-  subprojects*.test
-}

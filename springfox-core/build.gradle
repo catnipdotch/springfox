@@ -1,21 +1,8 @@
-ext {
-  limits = [
-      'instruction': 97,
-      'branch'     : 89,
-      'line'       : 96,
-      'complexity' : 93,
-      'method'     : 96,
-      'class'      : 98.5
-  ]
-}
-
 dependencies {
   compile "net.bytebuddy:byte-buddy:${byteBuddyVersion}"
   compile libs.core
   compile libs.spring
-  
-  provided libs.springProvided
-  provided libs.clientProvided
 
-  testCompile libs.test
+    compileOnly libs.springProvided
+    compileOnly libs.clientProvided
 }

@@ -1,28 +1,10 @@
-ext {
-  limits = [
-      'instruction': 96.5,
-      'branch'     : 91,
-      'line'       : 96.5,
-      'complexity' : 92,
-      'method'     : 96,
-      'class'      : 100
-  ]
-}
-
 dependencies {
   compile libs.core
   compile libs.spring
   compile project(':springfox-spi')
   compile project(':springfox-schema').sourceSets.main.output
 
-  provided libs.springProvided
-  provided libs.clientProvided
-  provided "org.reflections:reflections:$reflections"
-
-  testCompile "javax.validation:validation-api:$validationApiVersion"
-  testCompile project(':springfox-core')
-  testCompile libs.test
-  testCompile libs.swagger2Core
-  testCompile project(':springfox-core').sourceSets.test.output
-  testCompile project(':springfox-schema').sourceSets.test.output
+    compileOnly libs.springProvided
+    compileOnly libs.clientProvided
+    compileOnly "org.reflections:reflections:$reflections"
 }
